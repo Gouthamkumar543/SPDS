@@ -39,3 +39,15 @@ ggplot(data, aes(x = salary)) +
   labs(title = "Frequency Polygon of Salary",
        x = "Salary",
        y = "Frequency")
+
+#Ogive Curve
+breaks = seq(min(data$salary), max(data$salary), length.out = 8)
+salary_class = cut(data$salary, breaks = breaks, right = TRUE, include.lowest = TRUE)
+freq_table = table(salary_class)
+cum_freq = cumsum(freq_table)
+midpoints = (head(breaks, -1) + tail(breaks, -1)) / 2
+
+plot(midpoints, cum_freq, type = "o", col = "blue",
+     xlab = "Salary", ylab = "Cumulative Frequency",
+     main = "Ogive Curve for Salary Data")
+grid()
