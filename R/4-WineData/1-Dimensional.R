@@ -3,10 +3,13 @@ library(readxl)
 data = read_excel("Wine_Quality_Data.xlsx")
 head(data)
 
+quality <- data$quality
+quality_freq <- table(quality)
+
 #Pictogram
 library(ggplot2)
 df = as.data.frame(quality_freq)
-ggplot(df, aes(x = Var1, y = Freq)) +
+ggplot(df, aes(x = quality, y = Freq)) +
   geom_text(aes(label = strrep(".", Freq/10)), size = 6) +
   labs(title = "Pictogram of Wine Quality", x = "Quality", y = "Frequency") +
   theme_minimal()
